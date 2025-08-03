@@ -1,0 +1,12 @@
+# Go
+/bin/
+/dist/
+*.exe
+*.out
+*.log
+
+# Go modules
+/vendor/
+
+# IDE
+.vscode/
