@@ -1,3 +1,5 @@
+![logo](assets/infiltrator0.jpg)
+
 # Infiltrator 🕵️‍♂️
 
 **Infiltrator** is a stealth-oriented input surveillance tool written in Go.  
