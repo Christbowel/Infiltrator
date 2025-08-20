@@ -15,8 +15,9 @@ It captures keyboard input, clipboard contents, system metadata, and exfiltrates
 - 📋 Clipboard content capture
 - 🌐 IP address and approximate geolocation
 - 💻 Hostname & current user info
+- 📷 Periodic screenshots
 - 📤 Periodic exfiltration to Telegram bot (via HTTP API)
-- 🧩 Modular structure – easily extendable (e.g., screenshots, mic access, etc.)
+- 🧩 Modular structure – easily extendable (e.g. mic access, etc.)
 
 ---
 
